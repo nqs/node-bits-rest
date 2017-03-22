@@ -1,15 +1,3 @@
-import {findId} from './find_id';
-import {findBy} from './find_by';
+import queryBySyntax from './query_by_syntax';
 
-export const get = (name, database) => {
-  const find = findBy(name, database);
-
-  return req => {
-    const id = findId(req);
-    if (id) {
-      return find.id(id);
-    }
-
-    return find.query(req.query || {});
-  };
-};
+export const get = (name, database) => req => queryBySyntax(name, database, req);
